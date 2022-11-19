@@ -1,12 +1,30 @@
+/* eslint-disable */ 
+
 import './App.css';
 
 import Header from "./MyComponents/Header";
 import Todos from './MyComponents/Todos';
 import Footer from './MyComponents/Footer';
 import AddTodo from './MyComponents/AddTodo';
+import About from './MyComponents/About';
 import React, { useState, useEffect } from 'react';
 
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route
+} from "react-router-dom";
+
 function TestApp() {
+
+  const HomePage = ()=>{
+    return(
+      <>
+        <AddTodo addTodo={addTodo}/>
+        <Todos todos={todos} onDelete={onDelete}/>
+      </>
+    );
+  }
 
   let initTodo;
   if(localStorage.getItem("todos") === null){
@@ -40,10 +58,16 @@ function TestApp() {
 
   return (
     <>
-      <Header title="My Todos List" searchBar={true}/>
-      <AddTodo addTodo={addTodo}/>
-      <Todos todos={todos} onDelete={onDelete}/>
-      <Footer />
+      <Router>
+        <Header title="My Todos List" searchBar={true}/>
+
+        <Routes>
+          <Route exact path="/" element={<HomePage />}/>
+          <Route exact path="/about" element={<About />} />
+        </Routes>
+
+        <Footer />
+      </Router>
     </>
   );
 }
