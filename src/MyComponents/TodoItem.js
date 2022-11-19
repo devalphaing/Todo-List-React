@@ -9,8 +9,7 @@ export default function TodoItem(props) {
         <button className="btn btn-sm btn-danger" onClick={()=>{
           props.onDelete(props.todo)}
           }>Delete</button>
-        <br></br>
-        <br></br>
+        <hr/>
       </div>
     </>
   )
